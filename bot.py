@@ -8,10 +8,6 @@ CHANNEL_USERNAME = "@TWIXER_MUSIC"
 FILE_PATH = "басс — копия.zip"
 FILE_CAPTION = "🎵 Вот ваш драм кит! Спасибо за подписку на TWIXER!"
 
-# ========== HTTP ПРОКСИ ==========
-PROXY_URL = "http://45.12.30.130:3128"
-# =================================
-
 async def check_subscription(user_id: int, context: ContextTypes.DEFAULT_TYPE) -> bool:
     try:
         member = await context.bot.get_chat_member(
@@ -97,12 +93,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
 
 def main():
-    builder = Application.builder().token(BOT_TOKEN)
-    
-    if PROXY_URL:
-        builder.proxy(PROXY_URL)
-    
-    application = builder.build()
+    application = Application.builder().token(BOT_TOKEN).build()
     
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CallbackQueryHandler(button_handler))
